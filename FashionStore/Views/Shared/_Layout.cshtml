@@ -1,0 +1,233 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=devReturn & Exchangeice-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/favi.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="~/images/favi.ico" type="image/x-icon" />
+    <!-- Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- Favicons Icon -->
+    <link rel="icon" href="~/images/favi.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="~/images/favi.ico" type="image/x-icon" />
+    <!-- Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS Style -->
+    <!--<link rel="stylesheet" href="css/animate.css" type="text/css">-->
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/slider.css" rel="stylesheet" />
+    <link href="~/Content/owl.theme.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/style_loginform.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-social.css" rel="stylesheet" />
+    @RenderSection("styles_detail", required: false)
+    @RenderSection("styles_product", required: false)
+    @RenderSection("cart_styles", required: false)
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css'>
+
+</head>
+<body class="cms-index-index">
+    <div class="page">
+        @RenderPage("_Header.cshtml")
+        @RenderPage("_Navigation.cshtml")
+        <div class="main-page">
+            @RenderBody()
+        </div>
+        <!--Logo provider-->
+        <div class="brand-logo ">
+            <div class="container">
+                <div class="row">
+                    <div class="slider-items-products col-lg-12">
+                        <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col6">
+                                <!-- Item -->
+                                <div class="item"> <a href="#x"><img src="~/images/b-logo1.png" alt="Image"></a> </div>
+                                <!-- End Item -->
+                                <!-- Item -->
+                                <div class="item"> <a href="#x"><img src="~/images/b-logo2.png" alt="Image"></a> </div>
+                                <!-- End Item -->
+                                <!-- Item -->
+                                <div class="item"> <a href="#x"><img src="~/images/b-logo3.png" alt="Image"></a> </div>
+                                <!-- End Item -->
+                                <!-- Item -->
+                                <div class="item"> <a href="#x"><img src="~/images/b-logo4.png" alt="Image"></a> </div>
+                                <!-- End Item -->
+                                <!-- Item -->
+                                <div class="item"> <a href="#x"><img src="~/images/b-logo5.png" alt="Image"></a> </div>
+                                <!-- End Item -->
+                                <!-- Item -->
+                                <div class="item"> <a href="#x"><img src="~/images/b-logo6.png" alt="Image"></a> </div>
+                                <!-- End Item -->
+                                <!-- Item -->
+                                <div class="item"> <a href="#x"><img src="~/images/b-logo1.png" alt="Image"></a> </div>
+                                <!-- End Item -->
+                                <!-- Item -->
+                                <div class="item"> <a href="#x"><img src="~/images/b-logo4.png" alt="Image"></a> </div>
+                                <!-- End Item -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                            <div class="footer-logo"><a href="/" title="Logo"><img src="~/images/dorylogo.png" alt="logo"></a></div>
+                            <address>
+                                <i class="add-icon">&nbsp;</i>561 Điện Biên Phủ, P.25, <br>
+                                &nbsp;Quận Bình Thạnh, TP.Hồ Chí Minh
+                            </address>
+                            <div class="phone-footer"><i class="phone-icon">&nbsp;</i> +84 917 94 32 18</div>
+                            <div class="email-footer"><i class="email-icon">&nbsp;</i> <a href="mailto:doryshop@dory.com">doryshop@dory.com</a> </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                            <h4>Hướng dẫn mua hàng</h4>
+                            <ul class="links">
+                                <li class="first"><a href="#" title="Làm thế nào để mua hàng?">Mua hàng</a></li>
+                                <li><a href="faq.html" title="FAQs">FAQs</a></li>
+                                <li><a href="#" title="Thanh toán như thế nào?">Thanh toán</a></li>
+                                <li><a href="#" title="Vận chuyển">Vận chuyển</a></li>
+                                <li><a href="#" title="Xem đơn hàng ở đâu?">Xem đơn hàng</a></li>
+                                <li class="last"><a href="#" title="Chính sách hoàn trả">Chính sách hoàn trả</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                            <h4>Trợ giúp</h4>
+                            <ul class="links">
+                                <li class="first"><a href="#" title="Hỗ trợ tài khoản">Tài khoản</a></li>
+                                <li><a href="#" title="Thông tin">Thông tin</a></li>
+                                <li><a href="#" title="Địa chỉ">Địa chỉ</a></li>
+                                <li><a href="#" title="Giảm giá">Giảm giá</a></li>
+                                <li><a href="#" title="Lịch sử đơn hàng">Lịch sử đơn hàng</a></li>
+                                <li class="last"><a href="#" title="Thông tin thêm">Thông tin thêm</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-3 col-xs-12">
+                            <h4>Thông tin trang web</h4>
+                            <ul class="links">
+                                <li class="first"><a href="sitemap.html" title="Bản đồ">Sơ đồ trang web</a></li>
+                                <li><a href="#/" title="Tìm kiếm">Tìm kiếm</a></li>
+                                <li><a href="#" title="Tìm kiếm nâng cao">Tìm kiếm nâng cao</a></li>
+                                <li><a href="contact_us.html" title="Liên hệ">Liên hệ</a></li>
+                                <li><a href="#" title="Nhà tài trợ">Nhà tài trợ</a></li>
+                                <li class=" last"><a href="#" title="Thông tin cửa hàng" class="link-rss">Thông tin cửa hàng</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-8 col-sm-9 col-xs-12">
+                            <div class="block-subscribe">
+                                <h4>Đăng ký nhận thông báo qua mail</h4>
+                                <div class="newsletter">
+                                    <form>
+                                        <input type="email" placeholder="Nhập email..." class="input-text required-entry validate-email" title="Sign up for our newsletter" id="newsletter1" name="email">
+                                        <button class="subscribe" title="Subscribe" type="submit"><span>Đăng ký</span></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="social">
+                                <h4>Theo dõi chúng tôi</h4>
+                                <ul>
+                                    <li class="fb"><a href="#"></a></li>
+                                    <li class="tw"><a href="#"></a></li>
+                                    <li class="googleplus"><a href="#"></a></li>
+                                    <li class="rss"><a href="#"></a></li>
+                                    <li class="pintrest"><a href="#"></a></li>
+                                    <li class="linkedin"><a href="#"></a></li>
+                                    <li class="youtube"><a href="#"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12 coppyright"> &copy; 2015 Magikcommerce. All Rights Reserved.</div>
+                        <div class="col-sm-8 col-xs-12 company-links">
+                            <ul class="links">
+                                <li><a href="#" title="Magento Themes">Magento Themes</a></li>
+                                <li><a href="#" title="Premium Themes">Premium Themes</a></li>
+                                <li><a href="#" title="Responsive Themes">Responsive Themes</a></li>
+                                <li class="last"><a href="#" title="Magento Extensions">Magento Extensions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+    </div>
+    @{Html.RenderPartial("Login");}
+    <!-- JavaScript -->
+    <script type="text/javascript" src="~/Scripts/prototype.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/parallax.js"></script>
+    <script type="text/javascript" src="~/Scripts/common.js"></script>
+    <script type="text/javascript" src="~/Scripts/slider.js"></script>
+    <script type="text/javascript" src="~/Scripts/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/login.js"></script>
+    <script src="~/Scripts/inputValidate.js"></script>
+    @RenderSection("scripts_detail", required: false)
+    @RenderSection("script_product", required: false)
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery(function () {
+            jQuery(".slideshow").cycle({
+                fx: 'scrollHorz', easing: 'easeInOutCubic', timeout: 10000, speedOut: 800, speedIn: 800, sync: 1, pause: 1, fit: 0, pager: '#home-slides-pager',
+                prev: '#home-slides-prev',
+                next: '#home-slides-next'
+            });
+        });
+        //]]>
+    </script>
+
+    <script>
+        function login() {
+            $.post('/tai-khoan/login', {
+                email: $('#email').val(),
+                password: $('#password').val()
+            }, function (msg) {
+                if (msg === "") {
+                    location.reload();
+                }
+                else {
+                    $(".login-msg").html(msg);
+                }
+            });
+        };
+
+        function AddToCart(code) {
+            $.post('/them-gio', {
+                code: code
+            });
+            location.reload();
+        };
+
+        function DelFromCart(code) {
+            $.post('/xoa-gio', {
+                code: code
+            });
+            location.reload();
+        };
+        function goBack() {
+            history.back();
+        };
+    </script>
+</body>
+</html>

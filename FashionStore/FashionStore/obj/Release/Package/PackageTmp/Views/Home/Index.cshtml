@@ -1,0 +1,234 @@
+﻿@using ShopQuanAo.Models;
+@using System.Web.Mvc;
+
+@model IEnumerable<GetListProductBySortResult>
+
+@{
+    ViewBag.Title = "Dory Shop|Trang chủ";
+    var bestSellProduct = ViewBag.BestSellerProduct as List<GetListProductBySortResult>;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Slider -->
+<section class="slider-intro">
+    <div class="container">
+        <div class="the-slideshow slideshow-wrapper">
+            <ul style="overflow: hidden;" class="slideshow">
+                <li class="slide">
+                    <p><a title="#" href="#"> <img src="~/images/2016-fashion-trends.jpg" alt=""> </a></p>
+                    <div class="caption light2 top-right">
+                        <div class="caption-inner">
+                            @*<p class="heading">Responsive Layout</p>*@
+                        </div>
+                    </div>
+                </li>
+                <li class="slide">
+                    <p><a href="#"> <img src="~/images/tu-vung-tieng-anh-chu-de-thoi-trang-fashion1.jpg" alt=""></a></p>
+                    <div class="caption light top-right">
+                        <div class="caption-inner">
+                            <p class="normal-text">Collection 2014</p>
+                            <h2 class="heading permanent">You like this theme</h2>
+                            <p class="normal-text1">tristique senectus </p>
+                            <p class="intro-btn"><a href="#" title="Click to see all features">Buy Now</a> </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="slide">
+                    <p><a href="#"> <img src="~/images/banner-img.jpg" alt=""></a></p>
+                    <div class="caption light1 top-right">
+                        <div class="caption-inner">
+                            <p class="heading">Thời trang nữ 2016</p>
+                            <div class="badge"><em>up to</em> 70% <span>OFF</span></div>
+                            <p class="heading1">Lorem Ipsum là bộ sưu tập thời trang với các hoạ tiết đơn giản được thiết kế đẹp mắt và phù hợp phong cách thời trang 2016 cho phụ nữ Việt.</p>
+                            <p class="intro-btn"><a href="#" title="Click to see all features">Mua ngay</a> </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <a href="#" id="home-slides-prev" class="backward browse-button">previous</a> <a href="#" id="home-slides-next" class="forward browse-button">next</a>
+            <div id="home-slides-pager" class="tab-pager tab-pager-img tab-pager-ring-lgray"></div>
+        </div>
+    </div>
+</section>
+<!-- end Slider -->
+<!-- service section  -->
+<div class="service-section">
+    <div class="container">
+        <div id="store-messages">
+            <div class="message col-lg-4 col-sm-6 col-xs-12"><i class="icon-refresh">&nbsp;</i> <span><strong>Đổi &amp; Trả</strong> trong 3 ngày </span> </div>
+            <div class="message col-lg-4 col-sm-6 col-xs-12"><i class="icon-truck">&nbsp;</i><span><strong>Miễn phí vận chuyển</strong> đơn hàng trên 500.000đ</span> </div>
+            <div class="phone col-lg-4 col-sm-6 col-xs-12"><i class="icon-phone"></i>&nbsp;<span><strong>Liên hệ</strong> +8 917 94 32 18</span> </div>
+        </div>
+    </div>
+</div>
+
+<!-- End service section  -->
+<!-- main container -->
+<section class="main-container col1-layout home-content-container">
+    <div class="container">
+        <div class="row">
+            <div class="std">
+                <div class="best-pro col-lg-12">
+                    <div class="slider-items-products">
+                        <div class="new_title center">
+                            <h2>Giá sốc</h2>
+                        </div>
+                        <div id="best-seller-slider" class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col4">
+                                @foreach (var product in Model)
+                                {
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <div class="col-item">
+                                            @if (@product.discount_price < @product.price)
+                                            {
+                                                var price_percent = Math.Round((product.price - product.discount_price) * 100 / product.price, 0);
+                                                <div class="sale-label sale-top-right">
+                                                    <span>-@price_percent%</span>
+                                                </div>
+                                            }
+                                            <div class="item-inner">
+                                                <div class="item-img">
+                                                    @if ((DateTime.Now - product.date_added).TotalDays <= 7)
+                                                    {
+                                                        <div class="new-label new-top-left">Mới</div>
+                                                    }
+                                                    <div class="item-img-info">
+                                                        <a href="~/chi-tiet/@product.product_code" title="@product.name" class="product-image">
+                                                            <img src="~/products-images/@product.product_code/@product.image" alt="@product.name">
+                                                        </a>
+                                                        <div class="item-box-hover">
+                                                            <div class="box-inner">
+                                                                <div class="product-detail-bnt"><a href="~/chi-tiet/@product.product_code" class="button detail-bnt"><span>Chi tiết</span></a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="info-inner">
+                                                        <div class="item-title"> <a href="~/chi-tiet/@product.product_code" title="@product.name"> @product.name </a> </div>
+                                                        <div class="item-content">
+                                                            <div class="rating">
+                                                                <div class="ratings strong">
+                                                                    <div class="rating-box">
+                                                                        <div class="rating" style="width:@product.rating%"></div>
+                                                                    </div>
+                                                                    <p class="rating-links"> <a href="#">@product.view lượt xem</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="item-price">
+                                                                <div class="price-box">
+                                                                    @if (product.discount_price < @product.price)
+                                                                    {
+                                                                        <p class="special-price"> <span class="price" id="product-price-2"> @String.Format("{0:n0}", product.discount_price) VNĐ </span> </p>
+                                                                        <p class="old-price"> <span class="price" id="old-price-2"> @String.Format("{0:n0}", product.price) VNĐ </span> </p>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p class="special-price"> <span class="price" id="product-price-2"> @String.Format("{0:n0}", product.price) VNĐ </span> </p>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="actions">
+                                                        <span class="add-to-links">
+                                                            <a href="wishlist.html" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a>
+                                                            <button type="button" title="Add to Cart" class="button btn-cart" onclick="AddToCart('@product.product_code')"><span>Thêm vào giỏ</span></button>
+                                                            <a href="compare.html" class="link-compare" title="Add to Compare"><span>Add to Compare</span></a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Item -->
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured-pro col-lg-12">
+                    <div class="slider-items-products">
+                        <div class="new_title center">
+                            <h2>Xem nhiều</h2>
+                        </div>
+                        <div id="featured-slider" class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col4">
+                                @foreach (var product in bestSellProduct)
+                                {
+                                <!-- Item -->
+                                    <div class="item">
+                                        <div class="col-item">
+                                            @if (@product.discount_price < @product.price)
+                                            {
+                                                var price_percent = Math.Round((product.price - product.discount_price) * 100 / product.price, 0);
+                                                <div class="sale-label sale-top-right">
+                                                    <span>-@price_percent%</span>
+                                                </div>
+                                            }
+                                            <div class="item-inner">
+                                                <div class="item-img">
+                                                    @if ((DateTime.Now - product.date_added).TotalDays <= 7)
+                                                    {
+                                                        <div class="new-label new-top-left">Mới</div>
+                                                    }
+                                                    <div class="item-img-info">
+                                                        <a href="~/chi-tiet/@product.product_code" title="@product.name" class="product-image">
+                                                            <img src="~/products-images/@product.product_code/@product.image" alt="@product.name">
+                                                        </a>
+                                                        <div class="item-box-hover">
+                                                            <div class="box-inner">
+                                                                <div class="product-detail-bnt"><a href="~/chi-tiet/@product.product_code" class="button detail-bnt"><span>Chi tiết</span></a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="info-inner">
+                                                        <div class="item-title"> <a href="~/chi-tiet/@product.product_code" title="@product.name"> @product.name </a> </div>
+                                                        <div class="item-content">
+                                                            <div class="rating">
+                                                                <div class="ratings strong">
+                                                                    <div class="rating-box">
+                                                                        <div class="rating" style="width:@product.rating%"></div>
+                                                                    </div>
+                                                                    <p class="rating-links"> <a href="#">@product.view lượt xem</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="item-price">
+                                                                <div class="price-box">
+                                                                    @if (product.discount_price < @product.price)
+                                                                    {
+                                                                        <p class="special-price"> <span class="price" id="product-price-2"> @String.Format("{0:n0}", product.discount_price) VNĐ </span> </p>
+                                                                        <p class="old-price"> <span class="price" id="old-price-2"> @String.Format("{0:n0}", product.price) VNĐ </span> </p>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p class="special-price"> <span class="price" id="product-price-2"> @String.Format("{0:n0}", product.price) VNĐ </span> </p>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="actions">
+                                                        <span class="add-to-links">
+                                                            <a href="wishlist.html" class="link-wishlist" title="Add to Wishlist"><span>Thêm yêu thích</span></a>
+                                                            <button title="Add to Cart" class="button btn-cart" onclick="AddToCart('@product.product_code')"><span>Thêm vào giỏ</span></button>
+                                                            <a href="compare.html" class="link-compare" title="Add to Compare"><span>Thêm vào so sánh</span></a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Item -->
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

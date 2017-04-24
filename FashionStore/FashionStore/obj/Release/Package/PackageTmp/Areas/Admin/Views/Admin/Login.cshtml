@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng nhập</title>
+    <meta charset="UTF-8" />
+    <meta name="Designer" content="PremiumPixels.com">
+    <meta name="Author" content="$hekh@r d-Ziner, CSSJUNTION.com">
+    <link href="~/Areas/Admin/css/structure.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/css/reset.css" rel="stylesheet" />
+</head>
+<body>
+    <form class="box login" method="post" action="">
+        <header>
+            <h1>Đăng nhập</h1>
+        </header>
+        <fieldset class="boxBody">
+            @if (ViewBag.Msg != "")
+            {
+                <div class="msg" style="font-size: 14px; color: #ff0000; text-align: center;">@ViewBag.Msg</div>
+            }
+            <label>Tên đăng nhập</label>
+            <input type="text" name="username" placeholder="admin" required>
+            <label>Mật khẩu</label>
+            <input type="password" name="password" maxlength="16" required>
+            <a href="#" class="rLink">Quên mật khẩu?</a>
+        </fieldset>
+        <footer>
+            <label><input type="checkbox">Lưu đăng nhập</label>
+            <input type="submit" class="btnLogin" value="Đăng nhập">
+        </footer>
+    </form>
+</body>
+</html>

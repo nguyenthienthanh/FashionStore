@@ -1,0 +1,428 @@
+﻿@using ShopQuanAo.Models;
+@using PagedList.Mvc;
+@using ShopQuanAo.App_Start;
+@model PagedList.PagedList<GetListProductByCatalogIdResult>
+
+@{
+    ViewBag.Title = "Dory Shop|" + ViewBag.Title;
+    var providers = (List<provider>)ViewBag.provider;
+    var catalog0 = ViewBag.catalog0 as catalog;
+    var catalog1 = ViewBag.catalog1 as catalog;
+    var catalog2 = ViewBag.catalog2 as catalog;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <ul>
+                <li class="home"> <a href="/" title="">Trang chủ</a><span>&raquo; </span></li>
+                @if (catalog0 != null)
+                {
+                    <li class=""> <a href="@catalog0.route" title="">@catalog0.name</a><span>&raquo; </span></li>
+                }
+                @if (catalog1 != null)
+                {
+                    <li class=""> <a href="@catalog1.route" title="">@catalog1.name</a><span>&raquo; </span></li>
+                }
+                <li class="category13"><strong>@catalog2.name</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumbs -->
+<!-- Two columns content -->
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <div class="menu-fixed" data-spy="affix">
+                <h4>Tìm theo</h4>
+                <div class="sub-contain">
+                    <h5>Giá sản phẩm</h5>
+                    <form method="post" action="javascript:price()" role="form">
+                        <input id="slider" type="text" class="span2" value="" data-slider-min="50000" data-slider-max="3000000" data-slider-step="10000" data-slider-value="[250000,1000000]" />
+                        <div class="input-range">
+                            <input type="number" class="slider_range form-control" id="range_from" name="range_from" value="350000" />
+                            <span class="slider_char">-</span>
+                            <input type="number" class="slider_range form-control" id="range_to" name="range_to" value="1000000" />
+                            <button type="submit" class="slider_range-button form-control" value=" " />
+                        </div>
+                    </form>
+                </div>
+                <div class="sub-contain">
+                    <h5>Thương hiệu</h5>
+                    <form method="post" action="" role="form">
+                        <div class="provider-search">
+                            <input name="providername" type="text" placeholder="Từ khoá..." class="provider-input form-control" />
+                            <button type="submit" class="button-active form-control" value=" " />
+                        </div>
+                        <div class="providers-container">
+                            <div class="multiselect-container">
+                                <ul class="multiselect-list">
+                                    @foreach (var provider in providers)
+                                    {
+                                        <li class="item-provider">
+                                            <a href="">
+                                                <input type="checkbox" name="name" value=" " />
+                                                <span>@provider.name</span>
+                                                <i class="multiselect__item-count js-multiselect__item-count"> (310)</i>
+                                            </a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="provider-more"><a href="">Xem thêm...</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="category-title">
+                <h1 style="text-align: center; color: #0094ff;">@catalog2.name.ToUpper()</h1>
+            </div>
+            <div class="category-description std">
+                <div class="slider-items-products">
+                    <div id="category-desc-slider" class="product-flexslider hidden-buttons">
+                        <div class="slider-items slider-width-col1">
+
+                            <!-- Item -->
+                            <div class="item">
+                                <a href="#x"><img alt="" src="~/images/women_banner.png"></a>
+                                <div class="cat-img-title cat-bg cat-box">
+                                    @*<h2 class="cat-heading">Category Banner</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*@
+                                </div>
+                            </div>
+                            <!-- End Item -->
+                            <!-- Item -->
+                            <div class="item"> <a href="#x"><img alt="" src="~/images/women_banner1.png"></a> </div>
+                            <!-- End Item -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category-products">
+                <div class="toolbar">
+                    <div class="sorter">
+                        <div class="view-mode">
+                            <a class="button button-grid" id="grid" title="Grid" href="#">Grid</a>
+                            <a class="button button-list" id="list" title="List" href="#">List</a>
+                        </div>
+                    </div>
+                    <div id="sort-by">
+                        <label class="left">Sắp xếp: </label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Giá: Từ cao đến thấp
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                @{
+                                    var pathsort_1 = Request.QueryString["itemperpage"];
+                                    var pathsort_2 = Request.QueryString["page"];
+                                    var pathprice_1 = Request.QueryString["price"];
+                                    var pathsort = "sort=";
+
+
+                                    if (pathsort_1.IsEmpty())
+                                    {
+                                        if (!pathprice_1.IsEmpty())
+                                        {
+                                            pathprice_1 = "?price=" + pathprice_1;
+                                            pathsort = pathprice_1 + "&" + pathsort;
+                                        }
+                                        else
+                                        {
+                                            pathsort = "?" + pathsort;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!pathprice_1.IsEmpty())
+                                        {
+                                            pathsort = "?itemperpage=" + pathsort_1 + "&price=" + pathprice_1 + "&" + pathsort;
+                                        }
+                                        else
+                                        {
+                                            pathsort = "?itemperpage=" + pathsort_1 + "&" + pathsort;
+                                        }
+                                    }
+                                    if (!pathsort_2.IsEmpty())
+                                    {
+                                        pathsort_2 = "&page=" + pathsort_2;
+                                    }
+                                }
+                                <li><a href="@String.Concat(pathsort, String.Concat("pricedesc", pathsort_2))">Giá: Từ cao đến thấp</a></li>
+                                <li><a href="@String.Concat(pathsort, String.Concat("priceasc", pathsort_2))">Giá: Từ thấp đến cao</a></li>
+                                <li><a href="@String.Concat(pathsort, String.Concat("discountspecial", pathsort_2))">Giảm giá</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-grid" id="products">
+                    @if (Model.FirstOrDefault() == null)
+                    {
+                        <div><h2>Không tìm thấy sản phẩm!</h2></div>
+                    }
+                    <!--Product-->
+                    @foreach (var product in Model)
+                    {
+                        <div class="item col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="col-item">
+                                @if (@product.discount_price < @product.price)
+                                {
+                                    var price_percent = Math.Round((product.price - product.discount_price) * 100 / product.price, 0);
+                                    <div class="sale-label sale-top-right">
+                                        <span>-@price_percent%</span>
+                                    </div>
+                                }
+                                <div class="item-inner">
+                                    @if ((DateTime.Now - product.date_added).TotalDays <= 7)
+                                    {
+                                        <div class="new-label new-top-left">Mới</div>
+                                    }
+                                    <div class="item-img">
+                                        <div class="item-img-info">
+                                            <a href="~/chi-tiet/@product.product_code" title="@product.name" class="product-image">
+                                                <img src="~/products-images/@product.product_code/@product.image" alt="@product.name">
+                                            </a>
+                                            <div class="item-box-hover">
+                                                <div class="box-inner">
+                                                    <div class="product-detail-bnt"><a href="~/chi-tiet/@product.product_code" class="button detail-bnt"><span>Chi tiết</span></a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="info-inner">
+                                            <div class="item-title">
+                                                <a href="~/chi-tiet/@product.product_code" title="@product.name">
+                                                    @product.name
+                                                </a>
+                                            </div>
+                                            <div class="item-content">
+                                                <div class="rating">
+                                                    <div class="ratings strong">
+                                                        <div class="rating-box">
+                                                            <div class="rating" style="width:@product.rating%"></div>
+                                                        </div>
+                                                        <p class="rating-links"> <a href="#">@product.view lượt xem</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                    </div>
+                                                </div>
+                                                <div class="item-price">
+                                                    <div class="price-box">
+                                                        @if (product.discount_price < @product.price)
+                                                        {
+                                                            <p class="special-price"> <span class="price" id="product-price-2"> @String.Format("{0:n0}", product.discount_price) VNĐ </span> </p>
+                                                            <p class="old-price"> <span class="price" id="old-price-2"> @String.Format("{0:n0}", product.price) VNĐ </span> </p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="special-price"> <span class="price" id="product-price-2"> @String.Format("{0:n0}", product.price) VNĐ </span> </p>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="item-details">
+                                                    @cutString.SubString(@product.description, 100)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="actions">
+                                            <span class="add-to-links">
+                                                <a href="wishlist.html" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a>
+                                                <button type="button" title="Add to Cart" class="button btn-cart" onclick="AddToCart('@product.product_code')"><span>Thêm vào giỏ</span></button>
+                                                <a href="compare.html" class="link-compare" title="Add to Compare"><span>Add to Compare</span></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!--End product-->
+                    <div class="toolbar">
+                        <div class="pager">
+                            <div id="limiter">
+                                <label>Số sản phẩm trên trang: </label>
+                                <div class="dropdown">
+                                    @{
+                                        var pathper = Request.QueryString["page"];
+                                        var pathsort_ = Request.QueryString["sort"];
+                                        var pathprice_2 = Request.QueryString["price"];
+                                        if (!pathprice_2.IsEmpty())
+                                        {
+                                            pathprice_2 = "&price=" + pathprice_2;
+                                        }
+                                        if (!pathper.IsEmpty())
+                                        {
+                                            pathper = "&page=" + pathper;
+                                        }
+                                        if (!pathsort_.IsEmpty())
+                                        {
+                                            pathsort_ = "&sort=" + pathsort_;
+                                        }
+                                    }
+                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                        @{var itemperpage = Request.QueryString["itemperpage"] ?? "15";}
+                                        @itemperpage
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+
+                                        <li><a href=@String.Concat("?itemperpage=15", pathprice_2, pathsort_, pathper)>15</a></li>
+                                        <li><a href=@String.Concat("?itemperpage=30", pathprice_2, pathsort_, pathper)>30</a></li>
+                                        <li><a href=@String.Concat("?itemperpage=45", pathprice_2, pathsort_, pathper)>45</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pages">
+                                <label>Trang:</label>
+                                <ul class="pagination">
+                                    @{
+                                        var pathpage = Request.QueryString["itemperpage"];
+                                        var pathsort__ = Request.QueryString["sort"];
+                                        var pathprice_3 = Request.QueryString["price"];
+
+                                        if (pathpage.IsEmpty())
+                                        {
+                                            if (pathprice_3.IsEmpty())
+                                            {
+                                                if (!pathsort__.IsEmpty())
+                                                {
+                                                    pathsort__ = "?sort=" + pathsort__;
+                                                    pathpage = pathsort__ + "&page=";
+                                                }
+                                                else
+                                                {
+                                                    pathpage = "?page=";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!pathsort__.IsEmpty())
+                                                {
+                                                    pathsort__ = "?price=" + pathprice_3 + "&sort=" + pathsort__;
+                                                    pathpage = pathsort__ + "&page=";
+                                                }
+                                                else
+                                                {
+                                                    pathpage = "?price=" + pathprice_3 + "&page=";
+                                                }
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            if (!pathprice_3.IsEmpty())
+                                            {
+                                                if (!pathsort__.IsEmpty())
+                                                {
+                                                    pathsort__ = "&price=" + pathprice_3 + "&sort=" + pathsort__;
+                                                    pathpage = "?itemperpage=" + pathpage + pathsort__ + "&page=";
+                                                }
+                                                else
+                                                {
+                                                    pathpage = "?itemperpage=" + pathpage + "&price=" + pathprice_3 + "&page=";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!pathsort__.IsEmpty())
+                                                {
+                                                    pathsort__ = "&sort=" + pathsort__;
+                                                    pathpage = "?itemperpage=" + pathpage + pathsort__ + "&page=";
+                                                }
+                                                else
+                                                {
+                                                    pathpage = "?itemperpage=" + pathpage + "&page=";
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    @Html.PagedListPager(Model, page => pathpage + page);
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles_product{
+    <link href="~/Content/bootstrap-slider.min.css" rel="stylesheet" />
+    <link href="~/Content/product.css" rel="stylesheet" />
+}
+
+@section script_product{
+    <script src="~/Scripts/bootstrap-slider.min.js"></script>
+    <script>
+        var slider = new Slider("#slider");
+        slider.on("slide", function (slideEvt) {
+            $("#range_from").val(slider.getValue()[0]);
+            $("#range_to").val(slider.getValue()[1]);
+        });
+
+        var urlParams;
+        (window.onpopstate = function () {
+            var match,
+                pl = /\+/g,  // Regex for replacing addition symbol with a space
+                search = /([^&=]+)=?([^&]*)/g,
+                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                query = window.location.search.substring(1);
+
+            urlParams = {};
+            while (match = search.exec(query))
+                urlParams[decode(match[1])] = decode(match[2]);
+        })();
+
+        function price() {
+            var from = $("#range_from").val();
+            var to = $("#range_to").val();
+            var path = "";
+            var sort = urlParams["sort"] != null ? "&sort=" + urlParams["sort"] : "";
+            var page = urlParams["page"] != null ? "&page=" + urlParams["page"] : "";
+            if (urlParams["itemperpage"] != null) {
+                path = "?itemperpage=" + urlParams["itemperpage"] + "&price=" + from + "-" + to;
+            }
+            else {
+                path = "?price=" + from + "-" + to;
+            }
+            location.href = path + sort + page;
+        };
+
+        $('.menu-fixed').affix({
+            offset: {
+                top: function () {
+                    return (this.top = $('.container-fluid').outerHeight(true))
+                },
+                bottom: function () {
+                    return (this.bottom = $('.brand-logo').outerHeight(true))
+                }
+            }
+        });
+
+        $(document).ready(function () {
+            $('#list').click(function (event) {
+                event.preventDefault();
+                $("#list").addClass('button-active');
+                $("#grid").removeClass('button-active');
+                $('#products').removeClass('products-grid');
+                $('#products').addClass('products-list');
+            });
+            $('#grid').click(function (event) {
+                event.preventDefault();
+                $("#grid").addClass('button-active');
+                $("#list").removeClass('button-active');
+                $('#products').removeClass('products-list');
+                $('#products').addClass('products-grid');
+            });
+        });
+    </script>
+}

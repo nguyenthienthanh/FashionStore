@@ -1,0 +1,182 @@
+﻿.tooltip {
+    z-index: 999 !important;
+}
+.sub-contain {
+    margin-top: 20px;
+}
+
+    .sub-contain h5 {
+        font-weight: bold;
+    }
+
+.slider {
+    width: 100% !important;
+}
+
+.input-range {
+    margin: 10px;
+}
+
+.slider_range {
+    display: inline-block;
+    width: 100px;
+}
+
+.slider-char {
+    display: inline-block;
+    margin: 5px 10px;
+}
+
+.slider_range-button:after {
+    content: "\f04b";
+    font-family: FontAwesome;
+    color: #0094ff;
+}
+
+.slider_range-button {
+    display: inline-block;
+    width: auto;
+}
+
+.provider-search {
+    margin: 10px;
+}
+
+    .provider-search .provider-input {
+        display: inline-block;
+        width: 78%;
+    }
+
+    .provider-search button {
+        display: inline-block;
+        width: 20%;
+    }
+
+        .provider-search button::after {
+            content: "\f002";
+            font-family: FontAwesome;
+            color: #0094ff;
+            margin: 10px 5px;
+        }
+
+.providers-container {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.item-provider input {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 5px;
+}
+
+.item-provider a {
+    display: inline-block;
+}
+
+.multiselect-container a {
+    color: #000;
+}
+
+.provider-more {
+    text-align: right;
+    margin: 10px;
+}
+
+.affix {
+    position: fixed !important;
+}
+
+.products-grid .item .col-item .item-inner .item-info .info-inner .item-details {
+    display: none;
+}
+
+.products-list .item {
+    clear: both;
+    float: none;
+    width: 100%;
+    height: 250px;
+    margin: 15px 0 20px !important;
+    overflow: hidden;
+    padding: 5px 0 10px;
+}
+
+    .products-list .item .col-item,
+    .products-list .item .col-item .item-inner {
+        height: 100%;
+    }
+
+        .products-list .item .col-item .item-inner .item-img {
+            float: left;
+            height: 100%;
+            width: 25%;
+        }
+
+        .products-list .item .col-item .item-inner .item-info {
+            width: 75%;
+            float: left;
+            height: 100%;
+        }
+        .products-list .item .col-item .item-inner .item-info .actions {
+            clear: both;
+            width: 75%;
+            display: inline-block;
+            float: left;
+            text-align: left;
+        }
+            .product-list .col-item .item-inner .item-info .actions .button.btn-cart {
+                text-align: left;
+            }
+            .products-list .item .col-item .item-inner .item-info .actions .add-to-links a.link-wishlist {
+                clear: both;
+                left: 40%;
+                position: absolute;
+            }
+            .products-list .item .col-item .item-inner .item-info .actions .add-to-links a.link-compare {
+                clear: both;
+                position: absolute;
+                left: 45%;
+            }
+
+            .products-list .item .col-item .item-inner .item-info .info-inner {
+                height: 75%;
+            }
+
+                .products-list .item .col-item .item-inner .item-info .info-inner .item-title {
+                    padding: 0;
+                    text-align: left;
+                    max-width: 65% !important;
+                    padding-left: 10px;
+                }
+
+                .products-list .item .col-item .item-inner .item-info .info-inner .item-details {
+                    clear: both;
+                    display: block;
+                    text-align: left;
+                    font-weight: normal !important;
+                    font-size: 14px;
+                }
+
+                .products-list .item .col-item .item-inner .item-info .info-inner .item-content {
+                    clear: both;
+                    height: 100%;
+                    text-align: left;
+                    padding: 10px;
+                }
+
+                .products-list .item .col-item .item-inner .item-info .info-inner .rating {
+                    float: left;
+                }
+
+                .products-list .item .col-item .item-inner .item-info .info-inner .item-price {
+                    clear: both;
+                    display: inline-block;
+                    width: 300px;
+                }
+
+                    .products-list .item .col-item .item-inner .item-info .info-inner .item-price .special-price,
+                    .products-list .item .col-item .item-inner .item-info .info-inner .item-price .old-price {
+                        text-align: left;
+                        width: auto !important;
+                    }

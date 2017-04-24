@@ -1,0 +1,124 @@
+﻿@using ShopQuanAo.Areas.Admin.Models;
+
+@{
+    ViewBag.Title = "Thêm mới sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var providers = (List<provider>)ViewBag.Providers;
+    var catalogs = (List<catalog>)ViewBag.Catalogs;
+}
+
+<section class="content-header">
+    <h1>
+        Thêm sản phẩm mới
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="admin"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+        <li><a href="product">Sản phẩm</a></li>
+        <li class="active">Thêm sản phẩm</li>
+    </ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <form action="/admin/product/create" method="post" enctype="multipart/form-data">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12" style="display: inline-block;">
+                                <div class="col-sm-3" style="margin: 10px; padding: 5px;">
+                                    <h4>Mã sản phẩm<span style="color: #ff0000;">*</span></h4>
+                                    <input type="text" name="product-code" class="form-control" maxlength="10" style="font-size: 16px;" />
+                                </div>
+                                <div class="col-sm-8" style="margin: 10px; padding: 5px;">
+                                    <h4>Tên sản phẩm<span style="color: #ff0000;">*</span></h4>
+                                    <input type="text" name="product-name" class="form-control" style="font-size: 16px;" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12" style="display: inline-block;">
+                                <div class="col-sm-3" style="margin: 10px; padding: 5px;">
+                                    <h4>Nhà cung cấp<span style="color: #ff0000;">*</span></h4>
+                                    <select name="provider" class="form-control">
+                                        @foreach (var item in providers)
+                                        {
+                                            <option value="@item.provider_id">@item.name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-sm-4" style="margin: 10px; padding: 5px;">
+                                    <h4>Danh mục<span style="color: #ff0000;">*</span></h4>
+                                    <select name="catalog" class="form-control">
+                                        @foreach (var item in catalogs)
+                                        {
+                                            <option value="@item.catalog_id">@item.name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-sm-2" style="margin: 10px; padding: 5px;">
+                                    <h4>Số lượng<span style="color: #ff0000;">*</span></h4>
+                                    <input type="number" name="quantity" class="form-control" value="1" min="1" />
+                                </div>
+                                <div class="col-sm-2" style="margin: 10px; padding: 5px;">
+                                    <h4>Giá<span style="color: #ff0000;">*</span></h4>
+                                    <input type="number" name="price" class="form-control" value="10000" min="10000" step="1000" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12" style="display: inline-block;">
+                                <h4>Mô tả sản phẩm<span style="color: #ff0000;">*</span></h4>
+                                <textarea name="description" id="description"></textarea>
+                            </div>
+                            <div class="col-sm-12" style="display: inline-block;">
+                                <h4>Hình ảnh mô tả<span style="color: #ff0000;">*</span></h4>
+                                <div id="images-container" style="display: inline-block; width: 100%; min-height: 200px; color: rgba(128, 128, 128, 0.32); box-shadow: 2px 2px 10px #ccc; padding: 10px;">
+                                    <input class="add-image" name="fileupload" type="file" multiple accept="image/*" onchange='handleFiles(this)' />
+                                </div>
+                            </div>
+                            <div class="col-sm-12" style="display: inline-block; text-align: right; margin: 10px; padding: 10px;">
+                                <button class="button-add button-active" type="submit">Thêm mới</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section script_add {
+    <script>
+        var selected_file = $('.add-image').get(0).files[0];
+        var nBytes = 0;
+
+        function handleFiles(t) {
+            var fileList = t.files; /* now you can work with the file list */
+            var imageType = /image.*/;
+            for (var i = 0; i < fileList.length; i++) {
+
+                var file = fileList[i];
+                nBytes += file.size;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+
+                var img = document.createElement("img");
+                img.src = window.URL.createObjectURL(file);
+                img.height = 110;
+                img.width = 110;
+                img.className = 'image';
+                img.onload = function (e) {
+                    window.URL.revokeObjectURL(this.src);
+                }
+                document.getElementById('images-container').appendChild(img);
+            }
+        }
+        //CKEDITOR.skin = '~/Areas/Admin/js/plugins/ckeditor/skins/moono';
+        var editor = CKEDITOR.replace('description');
+        editor.on('change', function (evt) {
+            // getData() returns CKEditor's HTML content.
+            console.log('Total bytes: ' + CKEDITOR.instances.description.getData());
+        });
+    </script>
+}

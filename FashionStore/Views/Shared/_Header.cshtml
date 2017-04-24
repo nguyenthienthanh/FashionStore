@@ -1,0 +1,62 @@
+﻿@using ShopQuanAo.Models;
+
+@{
+    var customer = Session["customer"] as customer;
+}
+
+<!-- Header -->
+<header class="header-container">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-xs-6">
+
+                    <!-- Header Language -->
+                    <div class="dropdown block-language-wrapper">
+                        <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="~/images/english.png" alt="language"> English <i class="icon-angle-down"></i> </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="~/images/english.png" alt="language"> English </a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="~/images/francais.png" alt="language"> French </a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="~/images/german.png" alt="language"> German </a></li>
+                        </ul>
+                    </div>
+                    <!-- End Header Language -->
+                </div>
+                <div class="col-lg-7 col-md-7 col-xs-6">
+
+                    <!-- Header Top Links -->
+                    <div class="toplinks">
+                        <div class="links">
+
+
+                            @if (customer == null)
+                            {
+                                <div class="signup"><a href="~/tai-khoan/dang-ky" id="signupLink">Đăng ký</a></div>
+                                <div class="login"><a href="" id="loginLink">Đăng nhập</a></div>
+                            }
+                            else
+                            {
+                                <div class="wishlist"><a title="Danh sách yêu thích" href="wishlist.html"><span>Danh sách yêu thích</span></a></div>
+                                <div class="check"><a href="checkout.html" title="Kiểm tra đơn hàng"><span>Kiểm tra đơn hàng</span></a></div>
+                                        <!-- Header account -->
+                                <div class="dropdown block-company-wrapper hidden-xs">
+                                    <a role="button" data-toggle="dropdown" data-target="#" class="dropdown-toggle" href="#"> <span>@customer.name</span> <i class="icon-angle-down"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="about_us.html">Quản lý tài khoản</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Đơn hàng của tôi</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Quản lý đơn hàng</a></li>
+                                    </ul>
+                                </div>
+                                    <!-- End Header account -->
+                                <div class="logout"><a href="~/tai-khoan/dang-xuat" id="logoutLink">Đăng xuất</a></div>
+                            }
+
+                        </div>
+                    </div>
+                    <!-- End Header Top Links -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->

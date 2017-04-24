@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin: 10px;"><a href="javascript:goBack();" style="margin: 10px;">&lt;&lt;&lt;Tiếp tục mua hàng.</a></div>
+
+<div style="width: 100%;">
+    <div class="form-control" style="position: relative; font-size: 16px; width: 400px; height: auto; left: 32%;
+        margin: 30px; background: rgba(255, 255, 255, 0.58); padding: 20px; padding-top: 10px; box-shadow: 2px 2px 10px #ccc;">
+        <form action="" method="post">
+            <h2 style="text-align: center; border-bottom: solid 2px #227FE3; padding-bottom: 20px;">Đăng nhập</h2>
+            @if (ViewBag.msg != null)
+            {
+                <label style="color: #ff0000; text-align: center; margin: 10px; width: 100%;">@ViewBag.msg</label>
+            }
+            <label for="" style="text-align: left; margin: 10px;">Email</label>
+            <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email" style="font-size: 20px; height: 45px;">
+
+            <label for="" style="text-align: left; margin: 10px;">Mật khẩu</label>
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Mật khẩu" style="font-size: 20px; height: 45px;">
+            <div style="text-align: right; font-size: 14px; margin: 10px;"><a href="">Quên mật khẩu?</a></div>
+            <div style="text-align: center;">
+                <button type="submit" class="button-login button button-active" style="padding: 10px 30px; background: #227FE3;">Đăng nhập</button>
+            </div>
+            <div class="social" style="margin-top: 10px; text-align: center;">
+                <a href="/tai-khoan/fb-login" class="btn btn-block btn-social btn-facebook" style="width: auto; display: inline-block; margin: 5px;">
+                    <span class="fa fa-facebook"></span> Facebook
+                </a>
+                <a href="/tai-khoan/gg-login" class="btn btn-block btn-social btn-google" style="width: auto; display: inline-block; margin: 5px; padding: 6px 20px 6px 44px;">
+                    <span class="fa fa-google-plus"></span> Google+
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

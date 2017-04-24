@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Dory Shop|Đăng nhập";
+}
+
+<div class="login-wrap">
+    <div class="login-form">
+    </div>
+    <div class="form">
+        <div id="login">
+            <h1 class="login-title">Đăng nhập</h1>
+            <div class="login-msg"></div>
+            <form id="login" method="post" action="javascript:login();">
+                <div class="field-wrap">
+                    <label class="label">
+                        Email<span class="req">*</span>
+                    </label>
+                    <input name="email" id="email" type="email" required autocomplete="on" />
+                </div>
+                <div class="field-wrap">
+                    <label class="label">
+                        Mật khẩu<span class="req">*</span>
+                    </label>
+                    <input name="password" id="password" maxlength="16" type="password" required autocomplete="on" />
+                </div>
+                <p class="forgot"><a href="#">Quên mật khẩu?</a></p>
+                <button id="submit-login" class="button button-login button-block" value="login">Đăng nhập</button>
+                <div class="social" style="margin-top: 10px; text-align: center;">
+                    <a href="/tai-khoan/fb-login" class="btn btn-block btn-social btn-facebook" style="width: auto; display: inline-block; margin: 5px;">
+                        <span class="fa fa-facebook"></span> Facebook
+                    </a>
+                    <a href="/tai-khoan/gg-login" class="btn btn-block btn-social btn-google" style="width: auto; display: inline-block; margin: 5px; padding: 6px 20px 6px 44px;">
+                        <span class="fa fa-google-plus"></span> Google+
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

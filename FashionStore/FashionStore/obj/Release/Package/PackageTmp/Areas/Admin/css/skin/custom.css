@@ -1,0 +1,162 @@
+﻿.box .container {
+    padding: 10px;
+}
+
+    .box .container .add-new,
+    .box .container .del-all {
+        background: #0094ff;
+        color: #fff;
+        padding: 10px 10px 10px 0px;
+    }
+
+        .box .container .add-new:before {
+            content: "\f067";
+            font-family: FontAwesome;
+            color: #fff;
+            margin: 10px;
+            margin-left: 0px;
+            padding: 10px;
+            border-right: solid 1px #ccc;
+        }
+
+        .box .container .del-all:before {
+            content: "\f1f8";
+            font-family: FontAwesome;
+            color: #fff;
+            margin: 10px;
+            margin-left: 0px;
+            padding: 10px;
+            border-right: solid 1px #ccc;
+        }
+
+        .box .container .add-new:hover,
+        .box .container .del-all:hover {
+            box-shadow: 3px 3px 20px #ccc;
+            background: rgba(0, 148, 255, 0.82);
+        }
+
+.edit-button,
+.del-button {
+    clear: both;
+    background: none !important;
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.edit-button:hover,
+.del-button:hover{
+    box-shadow:none !important;
+    text-shadow: 2px 2px 10px #ccc;
+}
+
+.row .edit-button:before {
+    content: "\f040";
+    font-family: FontAwesome;
+    color: #0094ff;
+}
+
+.row .del-button:before {
+    content: "\f1f8";
+    font-family: FontAwesome;
+    color: #0094ff;
+}
+
+.modal.loading .modal-content:before {
+    content: 'Đang xoá...';
+    text-align: center;
+    line-height: 155px;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 55px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #EEE;
+    z-index: 1000;
+}
+
+.modal.err .modal-content:before {
+    content: 'Sản phẩm tồn tại trong nhiều bảng, không thể xoá sản phẩm này!';
+    text-align: center;
+    line-height: 155px;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 55px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #EEE;
+    z-index: 1000;
+}
+
+.modal.noproduct .modal-content:before {
+    content: 'Không có sản phẩm, không thể xoá!';
+    text-align: center;
+    line-height: 155px;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 55px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #EEE;
+    z-index: 1000;
+}
+
+#images-container .image {
+    float: left;
+    width: 110px;
+    height: 110px;
+    color: rgba(86, 153, 245, 0.66);
+    border: dotted 1px #ccc;
+    margin: 10px;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden;
+}
+
+.add-image,
+.del-image {
+    float: left;
+    width: 110px;
+    height: 110px;
+    color: rgba(86, 153, 245, 0.66);
+    border: dotted 1px #ccc;
+    margin: 10px;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden;
+}
+
+    .add-image:before {
+        content: '\f067';
+        font-family: FontAwesome;
+        font-size: 80px;
+        padding-left: 22px;
+    }
+
+    .del-image:before {
+        content: '\f00d';
+        font-family: FontAwesome;
+        font-size: 80px;
+        padding-left: 20px;
+        color: #ff0000;
+    }
+
+.button-add {
+    color: #fff;
+    background: #0094ff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+    .button-add:hover {
+        background: rgba(0, 148, 255, 0.82);
+        box-shadow: 2px 2px 20px #ccc;
+    }

@@ -1,0 +1,6 @@
+﻿@model IEnumerable<ShopQuanAo.Models.CatalogByParentResult>
+
+@foreach (var sub in Model)
+{
+    <li class="level2 nav-1-1-1 first"> <a href="~/san-pham/@sub.route"> <span>@sub.name</span> </a> </li>
+}

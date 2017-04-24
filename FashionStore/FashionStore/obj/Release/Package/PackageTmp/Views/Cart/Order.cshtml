@@ -1,0 +1,118 @@
+﻿@using ShopQuanAo.Models;
+@model IEnumerable<Cart>
+@{
+    ViewBag.Title = "Dory Shop|Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var customer = Session["customer"] as customer;
+}
+
+<div class="cart-container">
+    <div class="back-title"><a href="javascript:goBack();">&lt;&lt;Tiếp tục mua hàng</a></div>
+    <div class="sub-cart-container">
+        <form method="post" action="thanh-toan">
+            <div class="product-container container-fluid">
+                <div class="row content col-sm-8">
+                    @if (Model.Count() <= 0)
+                    {
+                        <h3>Không có sản phẩm nào trong giỏ hàng!</h3>
+                    }
+                    else
+                    {
+                        foreach (var cart in Model)
+                        {
+                            <div class="col-sm-12">
+                                <div class="cart-image col-sm-3">
+                                    <a href="~/chi-tiet/@cart.product_code">
+                                        <img src="~/products-images/@cart.product_code/@cart.image" />
+                                    </a>
+                                </div>
+                                <div class="name col-sm-9">
+                                    <a href="~/chi-tiet/@cart.product_code">
+                                        @cart.name
+                                    </a>
+                                </div>
+                                <div class="detail col-sm-9">
+                                    <div class="special-price col-sm-3">@String.Format("{0:n0}", cart.discount_price) VNĐ</div>
+                                    <div class="old-price col-sm-3">@String.Format("{0:n0}", cart.price) VNĐ</div>
+                                    <div class="quantity col-sm-3">
+                                        Số lượng
+                                        <input type="number" class="quantity form-control" min="1" max="10" value="@cart.quantity" />
+                                    </div>
+                                    <div class="amount col-sm-3">@String.Format("{0:n0}", cart.amount) VNĐ</div>
+                                </div>
+                                <button class="del-label" onclick="DelFromCart('@cart.product_code')">x</button>
+                                @{
+                            var per = Math.Round((cart.price - cart.discount_price) * 100 / cart.price);
+                                }
+                                @if (per > 0)
+                                {
+                                    <div class="sale-label sale-top-left">
+                                        <span>-@per%</span>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-sm-4">
+                    <div class="cart-pay col-sm-12">
+                        <div class="title">Thông tin đơn hàng</div>
+                        <div class="payment-accept col-sm-12" style="padding: 0; margin-top: 10px; display: inline-block;">
+                            <div class="col-sm-5" style="padding: 0; font-weight: 600;">
+                                Tên khách hàng:
+                            </div>
+                            <div class="col-sm-7" style="padding: 0; text-align: right;">
+                                @customer.name
+                            </div>
+                            <div class="col-sm-6" style="padding: 0; font-weight: 600;">
+                                Địa chỉ giao hàng:
+                            </div>
+                            <div class="col-sm-6" style="padding: 0; text-align: right;">
+                                @customer.street
+                            </div>
+                            <div class="col-sm-12" style="padding: 0; text-align: right;">
+                                @customer.city.city1
+                            </div>
+                            <div class="col-sm-5" style="padding: 0; font-weight: 600;">
+                                Số điện thoại:
+                            </div>
+                            <div class="col-sm-7" style="padding: 0; text-align: right;">
+                                @customer.phone
+                            </div>
+                            <div class="col-sm-4" style="padding: 0; font-weight: 600;">
+                                Ngày đặt:
+                            </div>
+                            <div class="col-sm-8" style="padding: 0; text-align: right;">
+                                @DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="col-sm-4" style="padding: 0; font-weight: 600;">
+                                Ngày giao:
+                            </div>
+                            <div class="col-sm-8" style="padding: 0; text-align: right;">
+                                @{
+                                    var month = DateTime.UtcNow.Month.ToString("00", System.Globalization.CultureInfo.InvariantCulture);
+                                    var toDay = DateTime.UtcNow.Year + "-" + month + "-" + DateTime.UtcNow.Day;
+                                }
+                                <input type="date" id="date_end" class="form-control" name="date_end" min="@toDay"
+                                       value="@toDay" style="text-align: right;" />
+                            </div>
+                        </div>
+                        <div class="content col-sm-12">
+                            <div class="col-sm-8">
+                                <b>Thành tiền</b>(Đã bao gồm thuế VAT)
+                            </div>
+                            <div class="amount col-sm-4">
+                                @String.Format("{0:n0}", ViewBag.Amount) VNĐ
+                            </div>
+                        </div>
+                        <button type="submit" class="button-login button button-block">Thanh toán</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section cart_styles {
+    <link href="~/Content/cart.css" rel="stylesheet" />
+}

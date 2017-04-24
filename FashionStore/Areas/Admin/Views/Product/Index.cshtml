@@ -1,0 +1,200 @@
+﻿@using ShopQuanAo.Areas.Admin.Models;
+@model IEnumerable<GetListProductBySortResult>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Danh sách sản phẩm
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="admin"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+        <li><a href="product">Sản phẩm</a></li>
+        <li class="active">Danh sách sản phẩm</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="container" style="margin: 10px;">
+                    <a href="/admin/product/create" class="add-new button-arrow">Thêm sản phẩm</a>
+                    <a href="/admin/product/del" class="del-all button-arrow">Xoá toàn bộ</a>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form id="frm-example" action="#" method="POST">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="no-sort" style="padding: 8px;">
+                                        <input name="select_all" value="1" id="example-select-all" type="checkbox" />
+                                    </th>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
+                                    <th style="padding-right: 8px; text-align: center;">Tác vụ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model)
+                                {
+                                    <tr role="row">
+                                        <td style="padding-top: 30px;"><input type="checkbox" class="editor-active" value="@product.product_code"></td>
+                                        <td style="font-weight: 500;">
+                                            <img src="~/products-images/@product.product_code/@product.image" style=" width: 70px; height: 70px;" /> @product.name
+                                        </td>
+                                        <td style="text-align: right; padding-top: 30px;">@String.Format("{0:n0}", product.quantity)</td>
+                                        <td style="text-align: right; padding-top: 30px;">@String.Format("{0:n0}", product.price) VNĐ</td>
+                                        <td style="text-align: center; padding-top: 30px;">
+                                            <a href="/admin/product/edit?code=@product.product_code" class="edit-button button" style="margin: 0px 5px;"> </a>
+                                            <a href="#" class="del-button button" style="margin: 0px 5px;"
+                                               data-record-id="@product.product_code" data-record-title="@product.name (@product.product_code)" data-toggle="modal" data-target="#confirm-delete"></a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="no-sort" style="width: 10px;">
+                                    </th>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
+                                    <th style="text-align: center;">Tác vụ</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Xoá sản phẩm</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn chắc chắn muốn xoá sản phẩm <b><i class="title"></i></b> ra khỏi cơ sở dữ liệu?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ bỏ</button>
+                <button type="button" class="btn btn-danger btn-ok">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.content -->
+@section script_product {
+
+    <script src="~/Areas/Admin/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/js/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script>
+        var editor;
+        $(document).ready(function () {
+            $('#example-select-all').on('click', function () {
+                // Check/uncheck all checkboxes in the table
+                var rows = table.rows({ 'search': 'applied' }).nodes();
+                $('input[type="checkbox"]', rows).prop('checked', this.checked);
+            });
+
+            // Handle click on checkbox to set state of "Select all" control
+            $('#example1 tbody').on('change', 'input[type="checkbox"]', function () {
+                // If checkbox is not checked
+                if (!this.checked) {
+                    var el = $('#example-select-all').get(0);
+                    // If "Select all" control is checked and has 'indeterminate' property
+                    if (el && el.checked && ('indeterminate' in el)) {
+                        // Set visual state of "Select all" control
+                        // as 'indeterminate'
+                        el.indeterminate = true;
+                    }
+                }
+            });
+            var table = $('#example1').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "visible": true,
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                    'searchable': false,
+                    data: "active",
+                    className: "dt-body-center"
+                },
+                {
+                    "targets": 4,
+                    "orderable": false,
+                    'searchable': false,
+                }],
+                'order': [1, 'asc']
+            });
+        });
+        // Bind click to OK button within popup
+        $('#confirm-delete').on('click', '.btn-ok', function (e) {
+
+            var $modalDiv = $(e.delegateTarget);
+            var id = $(this).data('recordId');
+            $modalDiv.addClass('loading');
+            $.post('/admin/product/del', {
+                code: id
+            }, function (msg) {
+                if (msg == 0) {
+                    $modalDiv.removeClass('loading');
+                    $modalDiv.addClass('noproduct');
+                    setTimeout(function () {
+                        $modalDiv.modal('hide').removeClass('noproduct');
+                    }, 1000);
+                }
+                else
+                    if (msg == -1) {
+                        $modalDiv.removeClass('loading');
+                        $modalDiv.addClass('err');
+                        setTimeout(function () {
+                            $modalDiv.modal('hide').removeClass('err');
+                        }, 1000);
+                    }
+                    else {
+                        location.reload();
+                    }
+            });
+
+            // In reality would be something like this
+            // $modalDiv.addClass('loading');
+            // $.post('/api/record/' + id).then(function() {
+            //   $modalDiv.modal('hide').removeClass('loading');
+            // });
+        });
+
+        // Bind to modal opening to set necessary data properties to be used to make request
+        $('#confirm-delete').on('show.bs.modal', function (e) {
+            var data = $(e.relatedTarget).data();
+            $('.title', this).text(data.recordTitle);
+            $('.btn-ok', this).data('recordId', data.recordId);
+        });
+    </script>
+}
+
+@section styles_product{
+    <link href="~/Areas/Admin/js/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+}

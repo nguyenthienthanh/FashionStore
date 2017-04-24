@@ -1,0 +1,53 @@
+﻿@using ShopQuanAo.Models;
+@{
+    var carts = Session["carts"] as List<Cart>;
+    var quantity = carts != null ? carts.Sum(x => x.quantity) : ViewBag.NumberCart != null ? ViewBag.NumberCart : 0;
+    var Amount = carts != null ? carts.Sum(x => x.amount) : 0;
+    carts = carts != null ? carts.OrderByDescending(x => x.date_added).Take(3).ToList() : carts;
+}
+
+<!--Cart-->
+<div class="mini-cart" id="mini-cart" style="float: right;">
+    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle" style=" width: 160px;">
+        <a href="~/gio-hang">
+            <span class="cart-quantity">@quantity</span>
+            <span>Giỏ hàng</span>
+        </a>
+    </div>
+    <div>
+        <div style="display: none;" class="top-cart-content arrow_box">
+            <div class="block-subtitle">Danh sách được thêm gần đây</div>
+            <ul id="cart-sidebar" class="mini-products-list">
+                @if (carts == null)
+                {
+                    <li style="text-align: center;">Không có sản phẩm!</li>
+                }
+                else
+                {
+                    foreach (var cart in carts)
+                    {
+                        <li class="item odd">
+                            <a href="~/chi-tiet/@cart.product_code" title="" class="product-image">
+                                <img src="~/products-images/@cart.product_code/@cart.image" alt="" width="55">
+                            </a>
+                            <div class="product-details">
+                                <a href="" title="Remove This Item" onclick="DelFromCart('@cart.product_code')" class="btn-remove1">
+                                    Xoá sản phẩm này
+                                </a>
+                                @*<a class="btn-edit" title="Edit item" href="#">Edit item</a>*@
+                                <p class="product-name"><a href="product_detail.html">@cart.name</a> </p>
+                                <strong>@cart.quantity</strong> x <span class="price">@String.Format("{0:n0}", cart.discount_price)</span>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+            <div class="top-subtotal">Thành tiền(Đã bao gồm VAT): <span class="price">@String.Format("{0:n0}", Amount)</span></div>
+            <div class="actions">
+                <a class="btn-checkout" href="~/don-hang"><span>Đơn hàng</span></a>
+                <a class="view-cart" href="~/gio-hang"><span>Giỏ hàng</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End cart-->

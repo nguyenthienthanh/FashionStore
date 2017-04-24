@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ShopQuanAo.Models.CatalogByParentResult>
+
+<!-- mobile-menu -->
+<div class="hidden-desktop" id="mobile-menu">
+    <ul class="navmenu">
+        <li>
+            <div class="menutop">
+                <div class="toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></div>
+            </div>
+            <ul style="display:none;" class="submenu">
+                <li>
+                    <ul class="topnav">
+                        <li class="level0 nav-1 level-top first parent">
+                            <a href="/" class="level-top"> <span>Trang chủ</span> </a>
+                        </li>
+                        @foreach (var parent in Model)
+                        {
+                            <li class="level0 nav-1 level-top first parent">
+                                <a href="~/san-pham/@parent.route" class="level-top"> <span>@parent.name</span> </a>
+                                <ul class="level0">
+                                    @Html.Action("MCatalog_child", "Home", new { iParent = @parent.catalog_id });
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<!-- Menu -->
+<ul id="nav" class="hidden-xs">
+    <li id="nav-home" class="level0 parent active">
+        <a href="/"><span>Trang chủ</span> </a>
+    </li>
+    <!-- Create menu from database-->
+    @foreach (var parent in Model)
+    {
+        <li class="level0 nav-5 level-top parent">
+            <a href="~/san-pham/@parent.route" class="level-top"> <span>@parent.name</span> </a>
+            <div style="display: none; left: 0px;" class="level0-wrapper dropdown-6col">
+                <div class="level0-wrapper2">
+                    <div class="nav-block nav-block-center">
+                        <ul class="level0">
+                            @Html.Action("Catalog_child", "Home", new { iParent = @parent.catalog_id })
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+    <!-- End create-->
+</ul>

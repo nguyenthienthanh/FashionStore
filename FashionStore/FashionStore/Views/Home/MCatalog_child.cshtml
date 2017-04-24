@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ShopQuanAo.Models.CatalogByParentResult>
+
+@foreach (var child in Model)
+{
+    <li class="level1 nav-1-1 first parent">
+        <a href="~/san-pham/@child.route"> <span>@child.name</span> </a>
+        <ul class="level1">
+            @Html.Action("MCatalog_sub", "Home", new { iParent = @child.catalog_id});
+        </ul>
+    </li>
+}

@@ -1,0 +1,20 @@
+﻿<!-- Navbar -->
+        <nav class="navbar" data-spy="affix" data-offset-top="40">
+        <div class="container-fluid">
+            <div class="">
+                @Html.Action("Catalog_par", "Home")
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                @RenderPage("~/Views/Shared/Navigation/_Cart.cshtml")
+                <!-- Search-col -->
+                <div class="search-box">
+                    <form action="#" method="POST" id="search_mini_form" name="Categories">
+                        <input type="text" placeholder="Nhập từ khoá tìm kiếm..." value="" maxlength="70" name="search" id="search">
+                        <button class="btn btn-default  search-btn-bg"> <span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                    </form>
+                </div>
+                <!-- End Search-col -->
+            </div>
+        </div>
+    </nav>
+<!-- end nav -->

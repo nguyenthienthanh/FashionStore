@@ -1,0 +1,171 @@
+﻿@using ShopQuanAo.Models;
+@{
+    ViewBag.Title = "Dory Shop|Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var citys = ViewBag.Citys as List<GetListCityResult>;
+}
+
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="panel panel-default" style="padding: 5px 10px;">
+            <div class="panel-heading">
+                <h2 class="signup-title">Đăng ký tài khoản mới</h2>
+            </div>
+            <form method="POST" action="javascript:signup();" class="signup-form">
+                <div class="control-group row-eq-height panel-body">
+                    <div class="col-md-6">
+                        <div>
+                            <p>Vui lòng điền đầy đủ thông tin dưới đây!</p>
+                            <label class="col-sm-4 col-md-4 control-label">Họ và tên*</label>
+                            <div class="col-sm-4">
+                                <input name="name" class="form-control" id="inputName" type="text" maxlength="200" required>
+                            </div>
+                            <div class="msg col-sm-4 col-md-4 control-label" id="name"></div>
+                        </div>
+
+                        <div>
+                            <label class="col-sm-4 col-md-4 control-label">Email*</label>
+                            <div class="col-sm-4">
+                                <input name="email" class="form-control" id="inputEmail" type="text" maxlength="50" required>
+                            </div>
+                            <div class="msg with-errors col-sm-4 col-md-4 control-label" id="email"></div>
+                        </div>
+
+                        <div>
+                            <label class="col-sm-4 col-md-4 control-label">Mật khẩu*</label>
+                            <div class="password col-sm-4">
+                                <input name="password" class="password form-control" data-minlength="8" maxlength="16" id="inputPassword" type="password" onchange="conf_pass(this.value, 1)" required>
+                                <span class=" showpwd-1 glyphicon glyphicon-eye-open"></span>
+                            </div>
+                            <div class="msg col-sm-4 col-md-4 control-label" id="password_msg"></div>
+                        </div>
+
+                        <div>
+                            <label class="col-sm-4 col-md-4 control-label">Nhập lại mật khẩu*</label>
+                            <div class="password col-sm-4">
+                                <input name="confirm_password" class="confirm_password form-control" data-match="#inputPassword" maxlength="16" id="inputpasswordconfirm" type="password" onchange="conf_pass(this.value, 2)" required>
+                                <span class="showpwd-2 glyphicon glyphicon-eye-open"></span>
+                            </div>
+                            <div class="msg with-errors col-sm-4 col-md-4 control-label" id="confirm_password_msg"></div>
+                        </div>
+                        <div class="msg">(*)Bắt buộc, điền đầy đủ thông tin.<br />Email có định dạng <i>vidu@abc.xyz</i></div>
+                    </div>
+                    <div class="col-md-6" style="top: 30px;">
+
+                        <div>
+                            <label class="col-sm-4 col-md-4 control-label">Số điện thoại*</label>
+                            <div class="col-sm-4">
+                                <input name="phone" class="form-control" id="phone" maxlength="11" type="text" required>
+                            </div>
+                            <div class="msg col-sm-4 col-md-4 control-label" id="phone_msg"></div>
+                        </div>
+
+                        <div>
+                            <label class="col-sm-4 col-md-4 control-label">Đường</label>
+                            <div class="col-sm-4">
+                                <input name="street" class="form-control" id="street" type="text" maxlength="100">
+                            </div>
+                            <div class="msg col-sm-4 col-md-4 control-label" id="street_msg"></div>
+                        </div>
+
+                        <div>
+                            <label class="col-sm-4 col-md-4 control-label">Quận/Huyện</label>
+                            <div class="col-sm-4">
+                                <input name="Province" class="form-control" id="province" type="text" maxlength="30">
+                            </div>
+                            <div class="msg col-sm-4 col-md-4 control-label" id="province_msg"></div>
+                        </div>
+
+                        <div>
+                            <label class="col-sm-4 col-md-4 control-label">Thành phố*</label>
+                            <div class="col-sm-4">
+                                <select name="city" class="form-control" id="city" required>
+                                    @foreach (var city in citys)
+                                    {
+                                        <option value="@city.city_id">@city.city</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="msg col-sm-4 col-md-4 control-label" id="city_msg"></div>
+                        </div>
+
+                        <input type="submit" class="signup-submit button button-block" value="Đăng ký" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    function conf_pass(value, s) {
+        if (value === "") {
+            $('#confirm_password_msg').html("");
+            $('#password_msg').html("");
+        }
+        else {
+            if (value.length < 8 || value.length > 16) {
+                if (s === 1) {
+                    $('#password_msg').html("Mật khẩu phải từ 8-16 ký tự");
+                }
+                else
+                    $('#confirm_password_msg').html("Mật khẩu phải từ 8-16 ký tự");
+            }
+            else
+                if (value.length >= 8 && value.length <= 16) {
+                    if (s === 1) {
+                        var val2 = $('.confirm_password').val();
+                        if (val2 != "") {
+                            if (val2 != value) {
+                                $('#password_msg').html("Mật khẩu không khớp");
+                                $('#confirm_password_msg').html("");
+                            }
+                            else {
+                                $('#confirm_password_msg').html("");
+                                $('#password_msg').html("");
+                            }
+                        }
+                    }
+                    else {
+                        var val2 = $('#inputPassword').val();
+                        if (val2 != "") {
+                            if (val2 != value) {
+                                $('#confirm_password_msg').html("Mật khẩu không khớp");
+                                $('#password_msg').html("");
+                            }
+                            else {
+                                $('#confirm_password_msg').html("");
+                                $('#password_msg').html("");
+                            }
+                        }
+                    }
+                }
+        }
+    }
+
+    function signup() {
+        if ($('#inputPassword').val() === $('.confirm_password').val()) {
+            $.post('', {
+                name: $('#inputName').val(),
+                email: $('#inputEmail').val(),
+                pass1st: $('#inputPassword').val(),
+                pass2nd: $('#inputpasswordconfirm').val(),
+                phone: $('#phone').val(),
+                province: $('#province').val(),
+                street: $('#street').val(),
+                district: $('#district').val(),
+                city: $('#city').val()
+            }, function (Msg) {
+                if (Msg.name_msg == "" && Msg.email_msg == "" && Msg.pass2_msg == "" && Msg.phone_msg == "") {
+                    location.reload();
+                }
+                else {
+                    $("#name").html(Msg.name_msg);
+                    $("#email").html(Msg.email_msg);
+                    $("#confirm_password_msg").html(Msg.pass2_msg);
+                    $("#phone_msg").html(Msg.phone_msg);
+                }
+            });
+        }
+    }
+</script>
