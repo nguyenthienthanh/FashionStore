@@ -31,3 +31,6 @@
 # Debug files
 *.dSYM/
 *.su
+#Bin folder
+*/bin
+*/obj
